@@ -26,6 +26,18 @@ Sprite.prototype.update = function(dt){
 	}
 };
 
+Sprite.prototype.collisionCheck = function(sprite) {
+	var collision = false;
+
+	if(Math.abs(this.y - sprite.y) <= (sprite.height/2)) {
+		if(Math.abs(this.x - sprite.x) <= (sprite.width/2)){
+			collision = true;
+		}
+	}
+
+	return collision;
+};
+
 // Enemies our player must avoid
 var Enemy = function(posx, posy, speed) {
     Sprite.call(this, posx, posy, 'images/enemy-bug.png');
@@ -69,6 +81,13 @@ Player.prototype.handleInput = function(direction) {
 			break;
 	}
 };
+
+Player.prototype.kill = function() {
+	// TODO: Add other code to handle life count.
+	// But for now we will just reset the player to the starting point.
+	this.x = 202;
+	this.y = 373;
+}
 
 var allEnemies = [new Enemy(-101,60,50), new Enemy(-101, 143, 60), new Enemy(-101,226,70)];
 
