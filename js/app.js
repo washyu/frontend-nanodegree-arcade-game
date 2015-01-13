@@ -13,15 +13,20 @@ Sprite.prototype.render = function() {
 
 Sprite.prototype.update = function(dt){
 	if(this instanceof Enemy){
+		//if the sprite is an Ememy we will move them across the screen left to right.
 		if (this.x > 505) {
+			//if the Enemy of off the right of the playfield we move him back to the left minus the width of the sprite.
 			this.x = -this.width;
 			if(this.y >= 226) {
+				//the enemy sprites will move down a row then wrap back to the top row.
+				//here if they are at the bottom row we moved them to the top row.
 				this.y = 60;
 			} else {
 				this.y += this.height;
 			}
 		} else {
-			this.x = this.x + (this.speed * dt);
+			//if nothing else needs to be done to reposition the sprites we jsut moved them across the playfield based on time from last move times veloicty.
+			this.x = this.x + (this.veloicty * dt);
 		}
 	}
 };
@@ -29,8 +34,8 @@ Sprite.prototype.update = function(dt){
 Sprite.prototype.collisionCheck = function(sprite) {
 	var collision = false;
 
-	if(Math.abs(this.y - sprite.y) <= (sprite.height/2)) {
-		if(Math.abs(this.x - sprite.x) <= (sprite.width/2)){
+	if(Math.abs(this.y - sprite.y) <= (sprite.height/2)) { //checking to see if the sprites are in the same row.
+		if(Math.abs(this.x - sprite.x) <= (sprite.width/2)){  //checking if the sprites are withing half the with of each other.  This should make them look they they are hitting each other.
 			collision = true;
 		}
 	}
@@ -39,9 +44,9 @@ Sprite.prototype.collisionCheck = function(sprite) {
 };
 
 // Enemies our player must avoid
-var Enemy = function(posx, posy, speed) {
+var Enemy = function(posx, posy, veloicty) {
     Sprite.call(this, posx, posy, 'images/enemy-bug.png');
-    this.speed = speed;
+    this.veloicty = veloicty;
 };
 
 Enemy.prototype = Object.create(Sprite.prototype);
@@ -89,7 +94,7 @@ Player.prototype.kill = function() {
 	this.y = 373;
 }
 
-var allEnemies = [new Enemy(-101,60,50), new Enemy(-101, 143, 60), new Enemy(-101,226,70)];
+var allEnemies = [new Enemy(-101,60,150), new Enemy(-101, 143, 500), new Enemy(-101,226,220)];
 
 var player = new Player();
 
