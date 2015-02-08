@@ -1,6 +1,10 @@
 frontend-nanodegree-arcade-game
 ===============================
 
-Students should use this rubric: https://www.udacity.com/course/viewer#!/c-ud015/l-3072058665/m-3072588797
+The game is a basic frogger clone.
 
-for self-checking their submission.
+To start the localy game load index.html in your browser or copy to your favorite web host and open index.html.
+
+The game should instantly start.  use the arrow key to control your player around the screen. The game is won my getting to the water by avoid the bugs.  Currently there is no score or win screen.  if you make it to the water or are hit by a bug  the game will just reset your player to the starting point.
+
+
